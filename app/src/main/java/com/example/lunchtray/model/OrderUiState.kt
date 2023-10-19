@@ -15,6 +15,8 @@
  */
 package com.example.lunchtray.model
 
+import com.example.lunchtray.LunchTrayScreen
+
 data class OrderUiState(
     // Entree Selection
     val entree: MenuItem.EntreeItem? = null,
