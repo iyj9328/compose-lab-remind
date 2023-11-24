@@ -19,10 +19,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.marsphotos.domain.GetMarsPhotoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
-class MarsViewModel : ViewModel() {
+class MarsViewModel @Inject constructor(
+    private val getMarsPhotoUseCase: GetMarsPhotoUseCase
+) : ViewModel() {
     /** The mutable State that stores the status of the most recent request */
     var marsUiState: String by mutableStateOf("")
         private set
@@ -38,7 +44,10 @@ class MarsViewModel : ViewModel() {
      * Gets Mars photos information from the Mars API Retrofit service and updates the
      * [MarsPhoto] [List] [MutableList].
      */
+
     fun getMarsPhotos() {
-        marsUiState = "Set the Mars API status response here!"
+        viewModelScope.launch {
+            marsUiState = getMarsPhotoUseCase.invoke()
+        }
     }
 }
