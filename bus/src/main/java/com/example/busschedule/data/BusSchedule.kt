@@ -13,22 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-rootProject.name = "Lunch Tray"
-include(":app")
-include(":sport")
-include(":mars")
-include(":bus")
+package com.example.busschedule.data
+
+data class BusSchedule(
+    val id: Int,
+    val stopName: String,
+    val arrivalTimeInMillis: Int
+)
